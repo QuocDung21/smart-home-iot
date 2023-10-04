@@ -67,6 +67,10 @@ router.get("/dropdata", async (req, res) => {
   }
 });
 
+route.get("/test", async (req, res) => {
+  res.json("Jelly");
+});
+
 router.get("/data", async (req, res) => {
   try {
     let data = require("../index.js");
