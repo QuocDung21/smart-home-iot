@@ -8,10 +8,13 @@ const authRouter = require("./routes/auth");
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", true);
-    await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      `mongodb+srv://quocdung:quocdung@test.stjgq5a.mongodb.net/app_iot`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("MongoDB connected");
   } catch (error) {
     console.log(error.message);
