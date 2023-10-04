@@ -67,7 +67,7 @@ router.get("/dropdata", async (req, res) => {
   }
 });
 
-route.get("/test", async (req, res) => {
+router.get("/test", async (req, res) => {
   res.json("Jelly");
 });
 
