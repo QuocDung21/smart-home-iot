@@ -73,7 +73,7 @@ router.get("/test", async (req, res) => {
 
 router.get("/data", async (req, res) => {
   try {
-    let data = require("../index.js");
+   		 let data = require("../index.js");
 
     res.json({ success: true, data });
   } catch (error) {
