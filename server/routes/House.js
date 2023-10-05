@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const requestPromise = require("request-promise");
+// const requestPromise = require("request-promise");
+const axios = require("axios");
 const esp32 = require("../models/esp32");
 let io;
 setTimeout(() => {
@@ -73,7 +74,7 @@ router.get("/test", async (req, res) => {
 
 router.get("/data", async (req, res) => {
   try {
-   		 let data = require("../index.js");
+    let data = require("../index.js");
 
     res.json({ success: true, data });
   } catch (error) {
@@ -157,6 +158,7 @@ const failCurrentJson = () => {
   };
 };
 
+
 router.get("/bot", async (req, res) => {
   try {
     const city = req.query.city;
@@ -165,26 +167,18 @@ router.get("/bot", async (req, res) => {
 
     if (check.length > 1) {
       const Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=cee343d33e41970dd63c44b39c8620ab`;
-      const reqOption = {
-        url: Url,
-        json: true,
-      };
 
-      requestPromise(reqOption)
-        .then((data) => {
-          const resData = getCurrentJson(data);
-          res.status(200).json(resData);
-        })
-        .catch((error) => {
-          const resData = failCurrentJson();
-          res.status(200).json(resData);
-        });
+      const response = await axios.get(Url);
+
+      const resData = getCurrentJson(response.data);
+      res.status(200).json(resData);
     } else {
       const resData = failCurrentJson();
       res.status(200).json(resData);
     }
   } catch (error) {
-    res.status(500).json({ success: false, message: "nodata" });
+    const resData = failCurrentJson();
+    res.status(200).json(resData);
   }
 });
 
