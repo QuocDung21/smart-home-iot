@@ -68,14 +68,9 @@ router.get("/dropdata", async (req, res) => {
   }
 });
 
-router.get("/test", async (req, res) => {
-  res.json("Jelly");
-});
-
 router.get("/data", async (req, res) => {
   try {
     let data = require("../index.js");
-
     res.json({ success: true, data });
   } catch (error) {
     res.status(500).json({ success: false, message: "nodata" });
@@ -157,7 +152,6 @@ const failCurrentJson = () => {
     ],
   };
 };
-
 
 router.get("/bot", async (req, res) => {
   try {
