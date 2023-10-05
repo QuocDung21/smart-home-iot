@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     const temp = req.query.temp;
     const humidity = req.query.humidity;
     const lamp = req.query.lamp;
-
+    console.log(req.query);
     const data = {
       itensity: parseFloat(itensity, 0),
       fan: fan,
